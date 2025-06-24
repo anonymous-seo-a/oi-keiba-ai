@@ -1,0 +1,131 @@
+# 大井競馬予想AI用 .gitignore
+
+# Python関連
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 仮想環境
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+oi_keiba_env/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# データファイル
+*.db
+*.sqlite
+*.sqlite3
+data/raw/*
+data/processed/*
+data/external/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# ログファイル
+*.log
+logs/
+
+# 設定ファイル（機密情報を含む）
+config/secrets.py
+config/api_keys.py
+.env
+.env.local
+.env.production
+
+# スクレイピング関連
+cookies/
+screenshots/
+temp_downloads/
+
+# 機械学習モデルファイル
+models/*.pkl
+models/*.joblib
+models/*.model
+!models/.gitkeep
+
+# 予想結果・投票履歴
+predictions/
+betting_history/
+results/
+
+# IDEファイル
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS関連
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# テスト関連
+.coverage
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+.cache
+
+# WebDriver
+chromedriver
+geckodriver
+*.exe
+
+# 一時ファイル
+tmp/
+temp/
+*.tmp
+
+# CSV・Excel等のデータファイル
+*.csv
+*.xlsx
+*.xls
+!sample_data.csv
+
+# 画像・動画ファイル
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.avi
+
+# 圧縮ファイル
+*.zip
+*.tar.gz
+*.rar
+
+# APIレスポンスキャッシュ
+cache/
+.cache/
