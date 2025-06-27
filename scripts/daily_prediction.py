@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 from datetime import datetime, timedelta
 import pandas as pd
+import numpy as np
 
 # プロジェクトルートをパスに追加
 sys.path.append(str(Path(__file__).parent.parent))
@@ -115,6 +116,21 @@ def predict_daily_races(predictor, races, betting_budget=10000, dry_run=True):
     
     return all_predictions
 
+def convert_to_serializable(obj):
+    """NumPy型をPython標準型に変換"""
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_to_serializable(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_serializable(item) for item in obj]
+    else:
+        return obj
+
 def save_predictions_to_file(predictions, filename=None):
     """予想結果をファイルに保存"""
     if not filename:
@@ -133,14 +149,14 @@ def save_predictions_to_file(predictions, filename=None):
             'race_id': race_pred['race_id'],
             'race_name': race_pred['race_name'],
             'race_time': race_pred['race_time'],
-            'predictions': race_pred['predictions'],
+            'predictions': [convert_to_serializable(pred) for pred in race_pred['predictions']],
             'recommendations': [
                 {
                     'horse_name': rec.horse_name,
                     'bet_type': rec.bet_type,
-                    'bet_amount': rec.bet_amount,
-                    'confidence': rec.confidence,
-                    'expected_return': rec.expected_return,
+                    'bet_amount': int(rec.bet_amount),  # int型に変換
+                    'confidence': float(rec.confidence),  # float型に変換
+                    'expected_return': float(rec.expected_return),  # float型に変換
                     'risk_level': rec.risk_level
                 } for rec in race_pred['recommendations']
             ]
